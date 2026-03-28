@@ -1,0 +1,226 @@
+[
+  {
+    "id": "16e81dd8-c46b-45a4-8569-e5492dd4fe89",
+    "name": "Job",
+    "notionDatabaseId": "31b1da77c6ce80b4a17ffdb90b8cc75e",
+    "databaseName": "Applications",
+    "properties": [
+      {
+        "name": "Link",
+        "type": "url",
+        "notionId": "%3BgUp",
+        "options": null
+      },
+      {
+        "name": "Salary",
+        "type": "rich_text",
+        "notionId": "Es~u",
+        "options": null
+      },
+      {
+        "name": "Location",
+        "type": "rich_text",
+        "notionId": "HGi%3B",
+        "options": null
+      },
+      {
+        "name": "Social",
+        "type": "select",
+        "notionId": "NFwX",
+        "options": null
+      },
+      {
+        "name": "Role",
+        "type": "select",
+        "notionId": "R~WF",
+        "options": [
+          {
+            "name": "Design"
+          },
+          {
+            "name": "Product Design"
+          }
+        ]
+      },
+      {
+        "name": "Message Sent Date",
+        "type": "rich_text",
+        "notionId": "Yfoo",
+        "options": null
+      },
+      {
+        "name": "Contact Status",
+        "type": "select",
+        "notionId": "%5Bed%5D",
+        "options": [
+          {
+            "name": "Not Sent"
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "type": "select",
+        "notionId": "%60n%40l",
+        "options": [
+          {
+            "name": "Applied"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      },
+      {
+        "name": "Contact Name",
+        "type": "rich_text",
+        "notionId": "kP%5Bd",
+        "options": null
+      },
+      {
+        "name": "Company",
+        "type": "rich_text",
+        "notionId": "oR%3CR",
+        "options": null
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "notionId": "r%7CkL",
+        "options": null
+      },
+      {
+        "name": "Remarks",
+        "type": "rich_text",
+        "notionId": "xxU%7D",
+        "options": null
+      },
+      {
+        "name": "Posting Title",
+        "type": "title",
+        "notionId": "title",
+        "options": null
+      }
+    ],
+    "mappingPrompt": "Extract the following data points from the provided content and map them to the corresponding Notion properties:\n\nPosting Title: Extract the primary job title. If multiple roles are mentioned, prioritize the main position title.\n\nCompany: Identify the name of the hiring organization or firm.\n\nLink: Copy the full URL of the job posting or the company career page.\n\nSalary: Extract any compensation figures, ranges (e.g., $100k-$120k), or hourly rates. Include currency symbols.\n\nLocation: Capture the city, state, or country. If the role is remote, specify \"Remote\" or \"Hybrid\" as stated.\n\nRole: Assign one of the following categories based on the job function: Engineering, Design, Product, Marketing, Sales, or Operations. If unclear, use \"Other\".\n\nSocial: Extract the name of the platform where the posting was found (e.g., LinkedIn, Indeed, Greenhouse, Lever, Company Site).\n\nContact Name: Identify the name of the recruiter, hiring manager, or person of contact listed in the post or inferred from the context.\n\nContact Status: Assign based on current interaction: Not Contacted, Outreach Sent, Replied, or Interviewing. Default to \"Not Contacted\" if no previous interaction exists.\n\nStatus: Track the application progress: Wishlist, Applied, Interviewing, Offer, or Rejected. Default to \"Wishlist\" for new entries.\n\nMessage Sent Date: Record the date that initial outreach or an application was submitted, formatted as YYYY-MM-DD. Leave blank if no contact has been made.\n\nDate: Record the date the job was posted or the date you added it to this database, formatted as YYYY-MM-DD.\n\nRemarks: Provide a brief summary of the role’s requirements, specific skills mentioned, or personal notes regarding why this role is of interest.",
+    "inputDescription": "",
+    "createdAt": "2026-03-06T22:20:22.169Z",
+    "lastRunAt": "2026-03-07T18:57:10.382Z",
+    "runCount": 15
+  },
+  {
+    "id": "0f1d5790-5712-4c81-9525-cdbfa473d81c",
+    "name": "Job",
+    "notionDatabaseId": "31b1da77c6ce80b4a17ffdb90b8cc75e",
+    "databaseName": "Applications",
+    "properties": [
+      {
+        "name": "Link",
+        "type": "url",
+        "notionId": "%3BgUp",
+        "options": null
+      },
+      {
+        "name": "Salary",
+        "type": "rich_text",
+        "notionId": "Es~u",
+        "options": null
+      },
+      {
+        "name": "Location",
+        "type": "rich_text",
+        "notionId": "HGi%3B",
+        "options": null
+      },
+      {
+        "name": "Social",
+        "type": "select",
+        "notionId": "NFwX",
+        "options": null
+      },
+      {
+        "name": "Role",
+        "type": "select",
+        "notionId": "R~WF",
+        "options": [
+          {
+            "name": "Design"
+          },
+          {
+            "name": "Product Design"
+          }
+        ]
+      },
+      {
+        "name": "Message Sent Date",
+        "type": "rich_text",
+        "notionId": "Yfoo",
+        "options": null
+      },
+      {
+        "name": "Contact Status",
+        "type": "select",
+        "notionId": "%5Bed%5D",
+        "options": [
+          {
+            "name": "Not Sent"
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "type": "select",
+        "notionId": "%60n%40l",
+        "options": [
+          {
+            "name": "Applied"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      },
+      {
+        "name": "Experience",
+        "type": "rich_text",
+        "notionId": "a_%3FI",
+        "options": null
+      },
+      {
+        "name": "Contact Name",
+        "type": "rich_text",
+        "notionId": "kP%5Bd",
+        "options": null
+      },
+      {
+        "name": "Company",
+        "type": "rich_text",
+        "notionId": "oR%3CR",
+        "options": null
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "notionId": "r%7CkL",
+        "options": null
+      },
+      {
+        "name": "Remarks",
+        "type": "rich_text",
+        "notionId": "xxU%7D",
+        "options": null
+      },
+      {
+        "name": "Posting Title",
+        "type": "title",
+        "notionId": "title",
+        "options": null
+      }
+    ],
+    "mappingPrompt": "Posting Title: Extract the primary job title, role name, or position headline. If the title includes the company name, remove it to keep only the job role.\n\nCompany: Identify the name of the hiring organization. Look for headers, \"at [Company Name],\" or mentions in the introductory sentence.\n\nSalary: Extract the numerical compensation range provided. Include currency symbols (e.g., $, €) and frequency (e.g., /year, /hour). If no salary is listed, leave blank.\n\nLocation: Extract the geographic work requirement. Look for specific city/state/country names or phrases like \"Remote,\" \"Hybrid,\" or \"On-site.\"\n\nExperience: Extract the years of experience required or the seniority level (e.g., \"3+ years,\" \"Senior,\" \"Entry-level\").\n\nLink: Copy the full URL of the job posting or source page.\n\nDate: Extract the publication date or the closing date of the job posting. Convert to YYYY-MM-DD format if possible.\n\nContact Name: Identify the recruiter or hiring manager’s name mentioned in the content. If none is listed, leave blank.\n\nMessage Sent Date: Leave blank (to be filled manually upon action).\n\nStatus: Set to \"New\" or \"To Apply\" by default for incoming data.\n\nContact Status: Set to \"Not Contacted\" by default.\n\nSocial: Identify the platform where the job was found (e.g., LinkedIn, Indeed, Company Site) and select the corresponding option.\n\nRole: Categorize the job type based on the Posting Title (e.g., Engineering, Marketing, Sales, Design).\n\nRemarks: Extract any additional relevant notes, such as key tech stack requirements, benefits, or interview process details mentioned in the text.",
+    "inputDescription": "",
+    "createdAt": "2026-03-07T18:59:01.162Z",
+    "lastRunAt": "2026-03-19T02:52:11.596Z",
+    "runCount": 58
+  }
+]
