@@ -1,32 +1,39 @@
-import fs from 'fs';
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-const TRANSFERS_FILE = path.join(process.cwd(), 'data', 'transfers.json');
+const STORAGE_KEY = 'notionify_transfers';
 
-function ensureDataDir() {
-    const dir = path.dirname(TRANSFERS_FILE);
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+function getStoredTransfers() {
+    if (typeof window === 'undefined') return [];
+    try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+    } catch {
+        return [];
     }
-    if (!fs.existsSync(TRANSFERS_FILE)) {
-        fs.writeFileSync(TRANSFERS_FILE, '[]', 'utf-8');
+}
+
+function saveTransfers(transfers) {
+    if (typeof window === 'undefined') return;
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(transfers));
+    } catch (err) {
+        console.error('Failed to save transfers to localStorage', err);
     }
 }
 
 export function getAllTransfers() {
-    ensureDataDir();
-    const data = fs.readFileSync(TRANSFERS_FILE, 'utf-8');
-    return JSON.parse(data);
+    return getStoredTransfers();
 }
 
 export function getTransferById(id) {
-    const transfers = getAllTransfers();
+    const transfers = getStoredTransfers();
     return transfers.find((t) => t.id === id) || null;
 }
 
 export function createTransfer({ name, notionDatabaseId, databaseName, properties, mappingPrompt, inputDescription }) {
-    const transfers = getAllTransfers();
+    if (typeof window === 'undefined') return null;
+
+    const transfers = getStoredTransfers();
     const newTransfer = {
         id: uuidv4(),
         name,
@@ -39,24 +46,32 @@ export function createTransfer({ name, notionDatabaseId, databaseName, propertie
         lastRunAt: null,
         runCount: 0,
     };
+    
     transfers.push(newTransfer);
-    fs.writeFileSync(TRANSFERS_FILE, JSON.stringify(transfers, null, 2), 'utf-8');
+    saveTransfers(transfers);
     return newTransfer;
 }
 
 export function updateTransfer(id, updates) {
-    const transfers = getAllTransfers();
+    if (typeof window === 'undefined') return null;
+
+    const transfers = getStoredTransfers();
     const index = transfers.findIndex((t) => t.id === id);
     if (index === -1) return null;
+    
     transfers[index] = { ...transfers[index], ...updates };
-    fs.writeFileSync(TRANSFERS_FILE, JSON.stringify(transfers, null, 2), 'utf-8');
+    saveTransfers(transfers);
     return transfers[index];
 }
 
 export function deleteTransfer(id) {
-    const transfers = getAllTransfers();
+    if (typeof window === 'undefined') return false;
+
+    const transfers = getStoredTransfers();
     const filtered = transfers.filter((t) => t.id !== id);
+    
     if (filtered.length === transfers.length) return false;
-    fs.writeFileSync(TRANSFERS_FILE, JSON.stringify(filtered, null, 2), 'utf-8');
+    
+    saveTransfers(filtered);
     return true;
 }

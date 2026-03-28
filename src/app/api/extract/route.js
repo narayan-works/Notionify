@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { extractData } from '@/lib/ai';
-import { getTransferById } from '@/lib/transfers';
 import { execSync } from 'child_process';
 import path from 'path';
 
@@ -33,7 +32,7 @@ export async function POST(request) {
     try {
         const aiProvider = request.headers.get('x-ai-provider') || 'gemini';
         const aiKey = request.headers.get('x-ai-key');
-        const { transferId, input } = await request.json();
+        const { transfer, input } = await request.json();
 
         if (!aiKey) {
             return NextResponse.json(
@@ -42,16 +41,11 @@ export async function POST(request) {
             );
         }
 
-        if (!transferId || !input) {
+        if (!transfer || !input) {
             return NextResponse.json(
-                { error: 'Transfer ID and input are required' },
+                { error: 'Transfer object and input are required' },
                 { status: 400 }
             );
-        }
-
-        const transfer = getTransferById(transferId);
-        if (!transfer) {
-            return NextResponse.json({ error: 'Transfer not found' }, { status: 404 });
         }
 
         // Get content (scrape if URL)

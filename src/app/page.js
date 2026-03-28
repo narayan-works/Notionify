@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { getAllTransfers, deleteTransfer } from '@/lib/transfers';
 
 const EMOJIS = ['📋', '💼', '📚', '🍳', '👥', '🎯', '🔖', '📁'];
 
@@ -33,8 +34,7 @@ export default function Dashboard() {
 
   async function fetchTransfers() {
     try {
-      const res = await fetch('/api/transfers');
-      const data = await res.json();
+      const data = getAllTransfers();
       setTransfers(data);
     } catch (err) {
       console.error('Failed to load transfers:', err);
@@ -45,7 +45,7 @@ export default function Dashboard() {
 
   async function handleDelete(id) {
     try {
-      await fetch(`/api/transfers/${id}`, { method: 'DELETE' });
+      deleteTransfer(id);
       setTransfers(transfers.filter((t) => t.id !== id));
       setDeleteId(null);
     } catch (err) {

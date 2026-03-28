@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { authHeaders } from '@/lib/settings';
+import { createTransfer } from '@/lib/transfers';
 
 const STEPS = [
     { label: 'Name & Database', icon: '📝' },
@@ -86,23 +87,17 @@ export default function NewTransfer() {
         setLoading(true);
         setError('');
         try {
-            const res = await fetch('/api/transfers', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name,
-                    notionDatabaseId: databaseId,
-                    databaseName,
-                    properties: schema,
-                    mappingPrompt,
-                    inputDescription,
-                }),
+            createTransfer({
+                name,
+                notionDatabaseId: databaseId,
+                databaseName,
+                properties: schema,
+                mappingPrompt,
+                inputDescription,
             });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error);
             router.push('/');
         } catch (err) {
-            setError(err.message);
+            setError('Failed to save transfer to local storage.');
         } finally {
             setLoading(false);
         }

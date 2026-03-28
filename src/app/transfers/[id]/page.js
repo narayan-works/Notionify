@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { authHeaders } from '@/lib/settings';
+import { getTransferById, updateTransfer } from '@/lib/transfers';
 
 export default function TransferDetail() {
     const router = useRouter();
@@ -27,9 +28,9 @@ export default function TransferDetail() {
 
     async function fetchTransfer() {
         try {
-            const res = await fetch(`/api/transfers/${params.id}`);
-            if (!res.ok) throw new Error('Transfer not found');
-            setTransfer(await res.json());
+            const data = getTransferById(params.id);
+            if (!data) throw new Error('Transfer not found');
+            setTransfer(data);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -47,7 +48,7 @@ export default function TransferDetail() {
             const res = await fetch('/api/extract', {
                 method: 'POST',
                 headers: authHeaders(),
-                body: JSON.stringify({ transferId: params.id, input }),
+                body: JSON.stringify({ transfer, input }),
             });
             const data = await res.json();
 
@@ -102,11 +103,23 @@ export default function TransferDetail() {
             const res = await fetch('/api/notion/write', {
                 method: 'POST',
                 headers: authHeaders(),
-                body: JSON.stringify({ transferId: params.id, properties: editedValues }),
+                body: JSON.stringify({ 
+                    notionDatabaseId: transfer.notionDatabaseId,
+                    schema: transfer.properties,
+                    properties: editedValues 
+                }),
             });
+            
             const data = await res.json();
             if (!res.ok) throw new Error(data.error);
+            
             setResult(data);
+
+            updateTransfer(transfer.id, {
+                lastRunAt: new Date().toISOString(),
+                runCount: (transfer.runCount || 0) + 1,
+            });
+
         } catch (err) {
             setError(err.message);
         } finally {
